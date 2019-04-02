@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Lesson2</string>
+    <string name="name">Название</string>
+    <string name="priority_4">Приоритет 4</string>
+    <string name="btnAdd">+</string>
+    <string name="tvPoint">•</string>
+</resources>
