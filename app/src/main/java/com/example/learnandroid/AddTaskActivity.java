@@ -1,6 +1,7 @@
 package com.example.learnandroid;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +13,13 @@ import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class AddTaskActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -25,9 +27,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText etName = findViewById(R.id.etName);
+        final EditText etName = findViewById(R.id.etName);
         final Button btnAdd = findViewById(R.id.btmAdd);
         btnAdd.setEnabled(false);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Task task = new Task(etName.getText().toString(), 0);
+                Intent data = new Intent().putExtra(Task.class.getName(), task);
+                setResult(RESULT_OK, data);
+                finish();
+            }
+        });
 
         etName.addTextChangedListener(new TextWatcher() {
             @Override
