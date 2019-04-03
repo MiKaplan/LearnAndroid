@@ -4,4 +4,7 @@
     <string name="priority_4">Приоритет 4</string>
     <string name="btnAdd">+</string>
     <string name="tvPoint">•</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

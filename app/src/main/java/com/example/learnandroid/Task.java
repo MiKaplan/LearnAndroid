@@ -1,6 +1,11 @@
 package com.example.learnandroid;
 
-public class Task {
+
+import java.io.Serializable;
+
+public class Task implements Serializable {
+
+    private static final long serialVersionUID = -3162801157068054221L;
     private final String name;
     private final int priority;
 
