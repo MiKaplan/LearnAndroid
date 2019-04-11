@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">Lesson2</string>
+    <string name="app_name">Менеджер задач</string>
     <string name="name">Название</string>
     <string name="priority_4">Приоритет 4</string>
     <string name="btnAdd">+</string>
     <string name="tvPoint">•</string>
+    <string name="action_send_mail">Отправить письмо разработчику</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.learnandroid.db.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 

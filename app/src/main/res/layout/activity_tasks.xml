@@ -4,6 +4,18 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+    
+<android.support.v7.widget.Toolbar
+    android:id="@+id/tb"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:title="@string/app_name"
+    android:background="@color/tabBackground"
+    app:titleTextColor="@color/toolbarTextColor"
+    android:theme="@style/Toolbar"
+    />
+
+
 
 <android.support.design.widget.TabLayout
     android:id="@+id/tl"
@@ -17,7 +29,8 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/btnColorBackground">
 
     </android.support.v4.view.ViewPager>
 </LinearLayout>

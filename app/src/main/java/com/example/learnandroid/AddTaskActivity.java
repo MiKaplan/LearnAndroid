@@ -13,10 +13,14 @@ import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.learnandroid.db.Task;
 
 
 public class AddTaskActivity extends AppCompatActivity {
@@ -66,4 +70,5 @@ public class AddTaskActivity extends AppCompatActivity {
         textView.setText(point);
 
     }
+
 }
