@@ -1,5 +1,6 @@
 package com.example.learnandroid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.learnandroid.db.AppDatabase;
+import com.example.learnandroid.db.Task;
+import com.example.learnandroid.db.TaskDao;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +25,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class TasksFragment extends Fragment {
     private static final int ADD_TASK_REQUEST_CODE = 101;
+    private TaskAdapter adapter;
 
     @Nullable
     @Override
@@ -46,32 +52,44 @@ public class TasksFragment extends Fragment {
         });
 
         rv = view.findViewById(R.id.rv);
-        rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false ));
-        TaskAdapter adapter = new TaskAdapter(new TaskClickListener() {
+        rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        adapter = new TaskAdapter(new TaskClickListener() {
             @Override
             public void onClick(Task task) {
-                Toast.makeText(getContext(), task.getName() + " in progres...", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), task.name + " in progres...", Toast.LENGTH_LONG).show();
             }
         });
         rv.setAdapter(adapter);
-        adapter.seData(generateFakeData());
+        getLatestTasks();
+
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+    @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_TASK_REQUEST_CODE && resultCode == RESULT_OK){
             if (data != null){
-                Task task = ((Task) data.getSerializableExtra(Task.class.getName()));
-                Toast.makeText(getContext(), task.getName(), Toast.LENGTH_SHORT).show();
+                insertTask(data);
+                getLatestTasks();
             }
         }
     }
 
-    public List<Task> generateFakeData(){
-        List<Task> tasks = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            tasks.add(new Task("Task " + i, 3));
+    private void getLatestTasks() {
+        Context context = getContext();
+        if (context != null){
+            AppDatabase db = App.getApp(context).getDb();
+            TaskDao taskDao = db.taskDao();
+            adapter.seData(taskDao.getAll());
         }
-        return  tasks;
+    }
+
+    private void insertTask(Intent data) {
+        Task task = ((Task) data.getSerializableExtra(Task.class.getName()));
+        Context context = getContext();
+        if (context != null){
+            AppDatabase db = App.getApp(context).getDb();
+            TaskDao taskDao = db.taskDao();
+            taskDao.insert(task);
+        }
     }
 }
